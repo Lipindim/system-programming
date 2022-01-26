@@ -1,23 +1,27 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Player : NetworkBehaviour
+
+namespace HomeWork3
 {
-    [SerializeField]
-    private GameObject playerPrefab;
-    private GameObject playerCharacter;
-
-    private void Start()
+    public class Player : NetworkBehaviour
     {
-        SpawnCharacter();
-    }
+        [SerializeField]
+        private GameObject playerPrefab;
+        private GameObject playerCharacter;
 
-    private void SpawnCharacter()
-    {
-        if (!isServer)
-            return;
+        private void Start()
+        {
+            SpawnCharacter();
+        }
 
-        playerCharacter = Instantiate(playerPrefab, transform);
-        NetworkServer.SpawnWithClientAuthority(playerCharacter, connectionToClient);
+        private void SpawnCharacter()
+        {
+            if (!isServer)
+                return;
+
+            playerCharacter = Instantiate(playerPrefab, transform);
+            NetworkServer.SpawnWithClientAuthority(playerCharacter, connectionToClient);
+        }
     }
 }
