@@ -1,4 +1,5 @@
 using System;
+using HomeWork5;
 using Main;
 using Mechanics;
 using Network;
@@ -10,16 +11,21 @@ namespace Characters
 {
     public class ShipController : NetworkMovableObject
     {
+        public static Action Connected;
+
         [SerializeField] private Transform _cameraAttach;
+        [SerializeField] private PlayerSettings _playerSettings;
+
         private CameraOrbit _cameraOrbit;
         private PlayerLabel playerLabel;
         private float _shipSpeed;
         private Rigidbody _rigidbody;
+        private Vector3 _startPosition;
 
         [SyncVar] private string _playerName;
 
-        [SyncEvent]
-        public event Action OnSomethingHappend;
+        //[SyncEvent]
+        //public event Action OnSomethingHappend;
 
         protected override float speed => _shipSpeed;
 
@@ -42,12 +48,16 @@ namespace Characters
             _rigidbody = GetComponent<Rigidbody>();
             if (_rigidbody == null)            
                 return;
-            
+
+            _playerName = _playerSettings.PlayerName;
             gameObject.name = _playerName;
             _cameraOrbit = FindObjectOfType<CameraOrbit>();
             _cameraOrbit.Initiate(_cameraAttach == null ? transform : _cameraAttach);
             playerLabel = GetComponentInChildren<PlayerLabel>();
+            _startPosition = transform.position;
             base.OnStartAuthority();
+
+            Connected?.Invoke();
         }
 
         public override void OnStartClient()
@@ -105,6 +115,7 @@ namespace Characters
 
         }
 
+
         [ClientRpc]
         private void RpcMethod(int value)
         {
@@ -135,23 +146,18 @@ namespace Characters
 
         }
 
-        [TargetRpc]
-        private void RpcTargetMethod()
-        {
+        //[TargetRpc]
+        //private void RpcTargetMethod()
+        //{
 
-        }
+        //}
 
         [ServerCallback]
         public void OnTriggerEnter(Collider other)
         {
-            if(hasAuthority)
-            {
-
-            }
-            else
-            {
-
-            }
+            gameObject.SetActive(false);
+            transform.position = _startPosition;
+            gameObject.SetActive(true);
         }
     }
 }

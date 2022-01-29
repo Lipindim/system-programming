@@ -11,7 +11,6 @@ namespace Main
         public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
         {
             var spawnTransform = GetStartPosition();
-
             var player = Instantiate(playerPrefab, spawnTransform.position, spawnTransform.rotation);
             player.GetComponent<ShipController>().PlayerName = playerName;
             NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
