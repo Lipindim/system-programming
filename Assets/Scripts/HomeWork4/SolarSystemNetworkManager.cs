@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.Networking;
 
 public class SolarSystemNetworkManager : NetworkManager
 {
+    public event Action ServerStarted;
+
     public override void OnStartClient(NetworkClient client)
     {
         base.OnStartClient(client);
@@ -35,6 +38,7 @@ public class SolarSystemNetworkManager : NetworkManager
     public void StartServerButton()
     {
         singleton.StartServer();
+        ServerStarted?.Invoke();
     }
 
     //Остановка сервера
