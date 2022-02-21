@@ -7,13 +7,13 @@ namespace Mechanics
     {
         protected override float speed => smoothTime;
 
-        [SerializeField] private Transform aroundPoint;
-        [SerializeField] private float smoothTime = .3f;
-        [SerializeField] private float circleInSecond = 1f;
+        public Vector3 AroundPoint;
+        public float CircleInSecond = 1f;
+        public float RotationSpeed;
 
+        [SerializeField] private float smoothTime = .3f;
         [SerializeField] private float offsetSin = 1;
         [SerializeField] private float offsetCos = 1;
-        [SerializeField] private float rotationSpeed;
 
         private float dist;
         private float currentAng;
@@ -26,11 +26,15 @@ namespace Mechanics
         {
             if (isServer)
             {
-                dist = (transform.position - aroundPoint.position).magnitude;
+                dist = (transform.position - AroundPoint).magnitude;
             }
             Initiate(UpdatePhase.FixedUpdate);
         }
 
+        private void Update()
+        {
+            HasAuthorityMovement();
+        }
         protected override void HasAuthorityMovement()
         {
             if (!isServer)
@@ -38,18 +42,18 @@ namespace Mechanics
                 return;
             }
 
-            Vector3 p = aroundPoint.position;
+            Vector3 p = AroundPoint;
             p.x += Mathf.Sin(currentAng) * dist * offsetSin;
             p.z += Mathf.Cos(currentAng) * dist * offsetCos;
             transform.position = p;
-            currentRotationAngle += Time.deltaTime * rotationSpeed;
+            currentRotationAngle += Time.deltaTime * RotationSpeed;
             currentRotationAngle = Mathf.Clamp(currentRotationAngle, 0, 361);
             if (currentRotationAngle >= 360)
             {
                 currentRotationAngle = 0;
             }
             transform.rotation = Quaternion.AngleAxis(currentRotationAngle, transform.up);
-            currentAng += circleRadians * circleInSecond * Time.deltaTime;
+            currentAng += circleRadians * CircleInSecond * Time.deltaTime;
 
             SendToServer();
         }

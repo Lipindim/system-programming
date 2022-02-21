@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2721b3c17dde984c9f7d3fea822ee45, type: 3}
+  m_Name: Planets
+  m_EditorClassIdentifier: 
+  PlanetPrefab: {fileID: 6944890934471280629, guid: 18bb7fbb44f5bea4dad37ae14fb0b364, type: 3}
+  CenterPosition: {x: 0, y: 0, z: 0}
+  Planets:
+  - Name: Mercury
+    Material: {fileID: 2100000, guid: 82cd70674b6a7154c8576f35195b6cd2, type: 2}
+    DistanceFromCenter: 123
+    StartAngle: 0.2
+    RotationSpeed: 1
+    CircleInSecond: 0.001
+  - Name: Venus
+    Material: {fileID: 2100000, guid: 618e09a5819a1c745879fbce20a1afe3, type: 2}
+    DistanceFromCenter: 169
+    StartAngle: 0.8
+    RotationSpeed: 5
+    CircleInSecond: 0.0015
+  - Name: Earth
+    Material: {fileID: 2100000, guid: 0a90856ac8572de4591a06db8a461a5b, type: 2}
+    DistanceFromCenter: 317
+    StartAngle: 2
+    RotationSpeed: 8
+    CircleInSecond: 0.002
+  - Name: Mars
+    Material: {fileID: 2100000, guid: 3af36dfe32d463c4d85a4ec9b010c9cc, type: 2}
+    DistanceFromCenter: 480
+    StartAngle: 1.5
+    RotationSpeed: 1
+    CircleInSecond: 0.0023
+  - Name: Jupiter
+    Material: {fileID: 2100000, guid: a3f2a962a1e01c342877f30b63742637, type: 2}
+    DistanceFromCenter: 800
+    StartAngle: 0.3
+    RotationSpeed: 10
+    CircleInSecond: 0.006
+  - Name: Saturn
+    Material: {fileID: 2100000, guid: 840bb631ee65b9940825764723901d92, type: 2}
+    DistanceFromCenter: 920
+    StartAngle: 2.4
+    RotationSpeed: 12
+    CircleInSecond: 0.003
+  - Name: Uranus
+    Material: {fileID: 2100000, guid: 07bdf34ae0b3ec141a0b5667a92c6f6d, type: 2}
+    DistanceFromCenter: 1020
+    StartAngle: 1.4
+    RotationSpeed: 6
+    CircleInSecond: 0.005
+  - Name: Neptune
+    Material: {fileID: 2100000, guid: 20d9298737dd00b4cba457972c4a6cc4, type: 2}
+    DistanceFromCenter: 1300
+    StartAngle: 2.2
+    RotationSpeed: 8
+    CircleInSecond: 0.008
